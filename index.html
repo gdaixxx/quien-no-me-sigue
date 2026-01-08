@@ -3,36 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css">
-    <script src="./main.js" defer></script>
+    <title>Instadaixo Social Stats</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/toggle-btn.css">
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/text-effects.css">
+    <script type="module" src="./main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <label class="tag">
-  <input type="radio" name="estado" value="rojo">
-  <span class="radio-custom"></span> Rojo
-</label>
-
-<label class="tag">
-  <input type="radio" name="estado" value="verde">
-  <span class="radio-custom"></span> Verde
-</label>
-    <div class="tag">
-    <div>
-        Hola
-    </div>
-    <div >
-         <input type="radio" class="green" name="fav_language" />
-         <input type="radio" name="fav_language" />
-         <input type="radio"  name="fav_language"/>
+<header>
+    
+<div class="encabezado">
+    <div class="">Clasificador de seguidores</div>
+    <div class="herramientas">
+        <button id="porColoresBtn" onclick="separarPorColores()">Separar por colores</button>
+        <button onclick="reiniciarColores()">Descartar colores</button>
+        <button>Alfabético</button>
     </div>
 </div>
+</header>
+<main>
+<section class="resumen-container" id="resumen-global">
+    <article class="card">
+        <div>🫡</div>
+        <div class="counter" id="te-siguen"></div>
+        <div>te siguen</div>
+    </article>
+    <article class="card">
+        <div>😉</div>
+        <div class="counter" id="seguis">
 
-<div id="resumen"></div>
-<h2>No te siguen: <span id="no-te-siguen-count">    </span></h2>
-<ul id="no-te-siguen-list"></ul>
+            <div class="new-counter">120</div>
+        </div>
+        <div>seguís</div>
+    </article>
+    <article class="card">
+        <div>😩</div>
+        <div class="counter" id="no-te-siguen"></div>
+        <div>no te siguen</div>
+    </article>
+    <article class="card">
+        <div>🤫</div>
+        <div class="counter" id="no-seguis"></div>
+        <div>no seguís</div>
+    </article>
+</section>
+<section class="resumen-container" id="resumen-semaforo" style="display:none;">
+    <article class="card">
+        <div>🔴</div>
+        <div class="counter" id="te-siguen"></div>
+        <div>vas a dejar de seguir</div>
+    </article>
+    <article class="card">
+        <div>🟡</div>
+        <div class="counter" id="seguis">
+
+            <div class="new-counter">120</div>
+        </div>
+        <div>quizá dejes de seguir</div>
+    </article>
+    <article class="card">
+        <div>🟢</div>
+        <div class="counter" id="no-te-siguen"></div>
+        <div>vas a continuar siguiendo</div>
+    </article>
+    <article class="card">
+        <div>⚪</div>
+        <div class="counter" id="no-seguis"></div>
+        <div>no lo decidiste aún</div>
+    </article>
+</section>
+
+
+<label class="switch">
+  <input type="checkbox" id="interruptor-semaforo">
+  <span class="slider round"></span>
+</label>
+<!-- <section>
+    <div id="resumen"></div>
+</section> -->
+
+<section>
+    <p>Usá el semáforo para clasificar las cuentas que no te siguen: rojo para dejar de seguir, verde para conservar, amarillo si estás en duda o simplemente sin color si todavía no tomaste una decusión.</p>
+
+</section>
+<hr>
+<section>
+    <h2>No te siguen: <span id="no-te-siguen-count">    </span></h2>
+    <article id="no-te-siguen-list"></article>
+
+</section>
+
+
+<section class="por-colores" id="contenedor-rojo">    
+    <h3> Dejar de seguir</h3>
+    <div id="rojo"></div>
+</section>
+
+<section class="por-colores" id="contenedor-amarillo">
+    <h3>En duda</h3>
+    <div id="amarillo"></div>
+</section>
+
+<section class="por-colores" id="contenedor-verde">
+    <h3>Conservar</h3>
+    <div id="verde"></div>
+</section>
+
+<section class="por-colores" id="contenedor-gris">
+    <h3>Sin evaluar</h3>
+    <div id="gris"></div>
+</section>
 <hr>    
-<h2 id="no-seguis">No seguís</h2>
+<section>
+    
+    <h2 id="no-seguis">No seguís</h2>
+</section>    
+</main>
+<footer>
+<div class="melting-text-container">
+    <p class="melting-text">Instadaixo</p>
+    </div>     <p>Desarrollado por <a href="https://instadaixo.com">Instadaixo</a></p>
 </body>
 </html>

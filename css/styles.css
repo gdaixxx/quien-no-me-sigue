@@ -1,0 +1,118 @@
+/* Reseteo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuentes */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+header{
+    background-color: #5E27F5;
+    position:sticky;
+    top:0;
+    color: white;
+    font-family:  "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 2em;
+    padding: 12px;
+}
+
+.encabezado{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+main {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+li, .user-item {
+    list-style: none;
+    margin: 8px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    cursor: pointer; 
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+.user-item.rojo { background-color: #ffcccc; }
+.user-item.amarillo { background-color: #fff4b3; }
+.user-item.verde { background-color: #ccffcc; }
+.user-item.gris { background-color: #fff; }
+
+
+button{
+    background-color: #2F079C;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    border: none;
+}
+
+button:hover{
+    background-color: #5E27F5;
+    cursor: pointer;
+}
+
+.tag {
+    margin: 8px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+
+input[type="radio"] {
+    border: red 2px solid;
+
+}
+
+.semaforo{
+    user-select: none;
+}
+
+#resumen-semaforo{
+    display: none;
+}
+
+.por-colores{
+    margin-top: 20px;
+    border: dotted 1px #333;
+    border-radius: 8px;
+    padding: 1em;
+    text-align: center;
+    display: none;    
+}
+
+#amarillo, #verde, #rojo, #gris, #contenedor-amarillo, #contenedor-verde, #contenedor-rojo, #contenedor-gris{
+    display: none;
+    margin: 1em
+}
+
+/* Voy a hacer acá un botón con forma de semáforo que al presionar alterne una propiedad en html (null, rojo, amarillo, verde) al hacerle clic y ello cambie el color de borde o de fondo del div contenedor 
+
+1) crear usuario y clave
+2) subir json
+3) semaforo
+4) reordenar por color
+5) guardar cambios en un registro de usuario
+6) subir nuevo json y contrastar cambios, eliminando los usuarios que ya no están e incorporando los nuevos*/
+
