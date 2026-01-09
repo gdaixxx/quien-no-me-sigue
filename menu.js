@@ -1,31 +1,3 @@
-//Imports
-import {compararFollowersFollowing} from './data.js';
-import {separarPorColores} from './semaforo.js';
-import {vistaSemaforoOff} from './semaforo.js';
-import {delayInColorUpdate} from './semaforo.js';
-import './semaforo.js';
-import {btnBorrarColores, btnAyuda} from './herramientasNavbar.js'
-import { interruptorSemaforo } from './semaforo.js';
-import { alerta } from './alertas.js';
-
-// Exports
-let timeout = null
-let separarPorColoresOn = false
-export { separarPorColoresOn };
-
-export function setSepararPorColoresOn(valor) {
-    separarPorColoresOn = valor;
-}
-
-export function getSepararPorColoresOn() {
-    return separarPorColoresOn;
-}
-
-// Renderizado inicial
-compararFollowersFollowing()
-btnBorrarColores()
-btnAyuda()
-
 const navbarIcons = document.querySelector(".herramientas");
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const hamburgerMenu = document.getElementById("hamburgerMenu");

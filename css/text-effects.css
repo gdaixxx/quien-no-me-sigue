@@ -65,3 +65,7 @@
     }
 }
 
+.brand-name{
+    font-size: clamp(0.8rem, 5vw, 2rem);
+    margin-right: 35px;
+}

@@ -36,6 +36,8 @@ function cambiarEstadoSemaforo(){
             if(getSepararPorColoresOn()){
                 delayInColorUpdate()
             }
+
+            actualizarResumenSemaforo()
         }
     })
 }
@@ -43,7 +45,7 @@ function cambiarEstadoSemaforo(){
 
 function separarPorColores(){
     
-    document.getElementById('resumen-semaforo').style.display = 'flex'
+    document.getElementById('resumen-semaforo').style.display = 'grid'
     document.getElementById('resumen-global').style.display = 'none'
     
     
@@ -92,7 +94,7 @@ function separarPorColores(){
     
     
     
-    const delayInColorUpdate = () => {
+const delayInColorUpdate = () => {
         // Si ya había un timeout pendiente, lo cancelo
         if (timeout) {
             clearTimeout(timeout);
@@ -107,7 +109,7 @@ function separarPorColores(){
         }, 1000); 
     };
     
-    const reiniciarColores = () => {
+const reiniciarColores = () => {
         const contenedor = document.getElementById('no-te-siguen-list');
         
         // Tomo todos los elementos .user-item como array
@@ -135,7 +137,7 @@ function separarPorColores(){
             el.style.display = 'none';
         });
         // me aseguro de que el resumen global esté visible y el resumen del semaforo oculto
-        document.getElementById('resumen-global').style.display = 'flex';
+        document.getElementById('resumen-global').style.display = 'grid';
         document.getElementById('resumen-semaforo').style.display = 'none'
     };
     
@@ -151,7 +153,7 @@ function separarPorColores(){
         
         document.querySelectorAll('.por-colores').forEach(el => {el.style.display = 'none';}) 
         
-        document.getElementById('resumen-global').style.display = 'flex';
+        document.getElementById('resumen-global').style.display = 'grid';
         document.getElementById('resumen-semaforo').style.display = 'none'
         
         setSepararPorColoresOn(false);
@@ -180,6 +182,7 @@ function separarPorColores(){
     });
     
 
+    //sacar de main
 const quitarDestacado = () => {
     const listado = document.getElementById('lista-de-usuarios');
     const activo = listado.querySelector('.user-item__activo');

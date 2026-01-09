@@ -1,4 +1,17 @@
-function efectoContadorAnimado(followersCount, followingCount, noTeSiguenCount, noSeguis) {
+import Swal from 'https://esm.sh/sweetalert2';
+
+function efectoContadorAnimado() {
+
+    const contadores = document.querySelectorAll('[class^="counter"]')
+    
+    contadores.forEach(counter => {
+        const endValue = parseInt(counter.textContent, 10);
+        animateValue(counter, 0, endValue, 2000);
+        // console.log('Animando contador para', counter, 'hasta', endValue);
+    });
+}
+
+function renderizarResumen(followersCount, followingCount, noTeSiguenCount, noSeguis) {
     const followersCounter = document.getElementById('te-siguen');
     const followingCounter = document.getElementById('seguis');
     const noTeSiguenCounter = document.getElementById('no-te-siguen');
@@ -8,14 +21,6 @@ function efectoContadorAnimado(followersCount, followingCount, noTeSiguenCount, 
     followingCounter.innerText = followingCount;
     noTeSiguenCounter.innerText = noTeSiguenCount;
     noSeguisCounter.innerText = noSeguis;
-
-    const contadores = document.querySelectorAll('.counter')
-    
-    contadores.forEach(counter => {
-        const endValue = parseInt(counter.textContent, 10);
-        animateValue(counter, 0, endValue, 2000);
-        // console.log('Animando contador para', counter, 'hasta', endValue);
-    });
 }
 
 function efectoContadorAnimadoEnVistasSemaforo() {
@@ -48,6 +53,44 @@ function animateValue(obj, start, end, duration) {
   
 }
 
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger"
+  },
+  buttonsStyling: false
+});
+function confirmarBorrado() {
+  return swalWithBootstrapButtons.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel!",
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      return swalWithBootstrapButtons.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      return swalWithBootstrapButtons.fire({
+        title: "Cancelled",
+        text: "Your imaginary file is safe :)",
+        icon: "error"
+      });
+    }
+    return result;
+  });
+}
+
+
 export { efectoContadorAnimado };
 export { animateValue };
 export { efectoContadorAnimadoEnVistasSemaforo };
+export { renderizarResumen };
+export { confirmarBorrado };

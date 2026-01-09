@@ -1,6 +1,9 @@
 import { cambiarEstadoSemaforo, separarPorColores, reiniciarColores, vistaSemaforoOff } from './semaforo.js';
-import {efectoContadorAnimado, animateValue, efectoContadorAnimadoEnVistasSemaforo} from './animation.js';
+
+import {efectoContadorAnimado, animateValue, efectoContadorAnimadoEnVistasSemaforo, renderizarResumen} from './animation.js';
+
 import { getSepararPorColoresOn, setSepararPorColoresOn } from './main.js';
+
 export { compararFollowersFollowing, cargarFollowers, cargarFollowing };
 
 async function cargarFollowers() {
@@ -62,22 +65,24 @@ async function compararFollowersFollowing(){
     const isSemaforoOn = document.getElementById('interruptor-semaforo').checked;
     setSepararPorColoresOn(isSemaforoOn);
 
+    renderizarResumen(dataFollowers.length, dataFollowing.relationships_following.length, noTeSiguen.length, "0");
+    actualizarResumenSemaforo();
+
     if(isSemaforoOn){
         separarPorColores();
-        const coloresEnSemaforo = actualizarResumenSemaforo();
-        efectoContadorAnimadoEnVistasSemaforo();
-        
+         efectoContadorAnimado() 
+            
     } else {
         vistaSemaforoOff();
-        efectoContadorAnimado(dataFollowers.length, dataFollowing.relationships_following.length, noTeSiguen.length, "0");
+         efectoContadorAnimado() 
     }
 
     // 5. EL TRUCO: requestAnimationFrame
     // Esto espera a que el navegador termine de "pintar" los cambios anteriores
-    requestAnimationFrame(() => {
-        actualizarResumenSemaforo();
-        // document.getElementById('resumen-semaforo').style.display = 'block';
-    });
+    // requestAnimationFrame(() => {
+    //     actualizarResumenSemaforo();
+    //     // document.getElementById('resumen-semaforo').style.display = 'block';
+    // });
 }
 
 //mostrar un div u otro según el estado del slider!!!!!!!!!! animar solo cuando sea necesario
@@ -132,10 +137,6 @@ document.getElementById('lista-de-usuarios').addEventListener('click', function(
     item.classList.replace('user-item', 'user-item__activo');
   }
 })};
-
-
-
-
 
 function restaurarEstados(){
     

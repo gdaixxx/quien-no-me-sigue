@@ -8,128 +8,172 @@
     <link rel="stylesheet" href="./css/toggle-btn.css">
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/text-effects.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    
     <script type="module" src="./main.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    
 </head>
 <body>
-<header>
+    <header>
+        
+        <div class="encabezado">
+ 
+            <button id="hamburgerBtn" style="display:none;">☰</button>
+ 
+            <h1 class="brand-name">Clasificador de&nbsp;seguidores</h1>
+
+            <div class="herramientas">
+
+                <div class="toolbox">
+                    
+                    <div class="tooltip">
+                        <span class="material-symbols-outlined toolbar-tool" id="btn-borrar-colores">format_color_reset</span>
+                        <span class="tooltiptext">Reiniciar colores</span>
+                    </div>
+                    
+                    <div class="tooltip" id="help">
+                        <span class="material-symbols-outlined toolbar-tool">help</span>
+                        <span class="tooltiptext">Cómo funciona</span>
+                    </div>
+                                        
+                    <div class="tooltip">
+                        <span class="material-symbols-outlined toolbar-tool danger">delete</span>
+                        <span class="tooltiptext">Eliminar datos</span>
+                    </div>
+                </div>  
+                
+                <div class="separador-vertical">&nbsp;</div>
+
+
+                <div id="bloque-interruptor">
+                    <div id="contenedorIconoSemaforo">
+                        <span class="material-symbols-outlined" id="icono-semaforo">traffic</span>
+                    </div>
+                    
+                    <label class="switch tooltip">
+                        <input type="checkbox" id="interruptor-semaforo">
+                        <span class="slider round"></span>
+                        <span class="tooltiptext">Modo semáforo <br>ON/OFF</span>
+                    </label>
+                </div>
+                
+            </div>
+            
+                <div id="hamburgerMenu" style="display:none;"></div>
+        </div>
+
+
+    </header>
+
+    <main>
+        <div class="resumen-containers-wrapper">
+            <section class="resumen-container" id="resumen-global">
+
+                <article class="card">
+                    <div class="card-emoji">🫡</div>
+                    <div class="counter" id="te-siguen"></div>
+                    <div class="card-label">te siguen</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">😉</div>
+                    <div class="counter" id="seguis">
+                        <div class="new-counter"></div>
+                    </div>
+                    <div class="card-label">seguís</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">😩</div>
+                    <div class="counter" id="no-te-siguen"></div>
+                    <div class="card-label">no te siguen</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">🤫</div>
+                    <div class="counter" id="no-seguis"></div>
+                    <div class="card-label">no seguís</div>
+                </article>
+
+            </section>
+            <section class="resumen-container" id="resumen-semaforo" style="display:none;">
+                <article class="card">
+                    <div class="card-emoji">🔴</div>
+                    <div class="counter-semaforo rojo-count" id="resumen-rojo">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Dejar de seguir</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">🟡</div>
+                    <div class="counter-semaforo amarillo-count" id="resumen-amarillo">
+                        <span class="mini-loader"></span>
+                    </div>
+                    <div class="card-label">En duda</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">🟢</div>
+                    <div class="counter-semaforo verde-count" id="resumen-verde">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Conservar</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">⚪</div>
+                    <div class="counter-semaforo gris-count" id="resumen-gris">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Sin evaluar</div>
+                </article>
+                
+            </section>
+        </div>
+        
+        <div class="separador-horizontal">    </div>
+        
+        <div id="lista-de-usuarios">
+            
+            <section>
+                <h2>No te siguen</h2>
+                <article id="no-te-siguen-list"></article>
+            </section>
+            
+            <div class="semaforo-grid-wrapper">
+                
+                <section class="por-colores" id="contenedor-rojo">    
+                    <h3> Dejar de seguir</h3>
+                    <div id="rojo"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-amarillo">
+                    <h3>En duda</h3>
+                    <div id="amarillo"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-verde">
+                    <h3>Conservar</h3>
+                    <div id="verde"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-gris">
+                    <h3>Sin evaluar</h3>
+                    <div id="gris"></div>
+                </section>
+            </div>
+            <div class="separador-horizontal">    </div>
+            
+            <section>
+                
+                <h2 id="no-seguis">No seguís</h2>
+            </section>
+            
+        </div>    
+    </main>
     
-<div class="encabezado">
-    <div class="">Clasificador de seguidores</div>
-    <div class="herramientas">
-        <button id="porColoresBtn" onclick="separarPorColores()">Separar por colores</button>
-        <button onclick="reiniciarColores()">Descartar colores</button>
-        <button>Alfabético</button>
-    </div>
-</div>
-</header>
-<main>
-<section class="resumen-container" id="resumen-global">
-    <article class="card">
-        <div>🫡</div>
-        <div class="counter" id="te-siguen"></div>
-        <div>te siguen</div>
-    </article>
-    <article class="card">
-        <div>😉</div>
-        <div class="counter" id="seguis">
-
-            <div class="new-counter">120</div>
-        </div>
-        <div>seguís</div>
-    </article>
-    <article class="card">
-        <div>😩</div>
-        <div class="counter" id="no-te-siguen"></div>
-        <div>no te siguen</div>
-    </article>
-    <article class="card">
-        <div>🤫</div>
-        <div class="counter" id="no-seguis"></div>
-        <div>no seguís</div>
-    </article>
-</section>
-<section class="resumen-container" id="resumen-semaforo" style="display:none;">
-    <article class="card">
-        <div>🔴</div>
-        <div class="counter-semaforo rojo-count" id="resumen-rojo">0<span class="mini-loader"></span></div>
-        <div>vas a dejar de seguir</div>
-    </article>
-    <article class="card">
-        <div>🟡</div>
-        <div class="counter-semaforo amarillo-count" id="resumen-amarillo">
-            <span class="mini-loader"></span>
-        </div>
-        <div>quizá dejes de seguir</div>
-    </article>
-    <article class="card">
-        <div>🟢</div>
-        <div class="counter-semaforo verde-count" id="resumen-verde">0<span class="mini-loader"></span></div>
-        <div>vas a continuar siguiendo</div>
-    </article>
-    <article class="card">
-        <div>⚪</div>
-        <div class="counter-semaforo gris-count" id="resumen-gris">0<span class="mini-loader"></span></div>
-        <div>no lo decidiste aún</div>
-    </article>
-
-</section>
-
-
-<label class="switch">
-  <input type="checkbox" id="interruptor-semaforo">
-  <span class="slider round"></span>
-</label>
-<!-- <section>
-    <div id="resumen"></div>
-</section> -->
-
-<section>
-    <p>Usá el semáforo para clasificar las cuentas que no te siguen: rojo para dejar de seguir, verde para conservar, amarillo si estás en duda o simplemente sin color si todavía no tomaste una decusión.</p>
-
-</section>
-<hr>
-
-<div id="lista-de-usuarios">
-
-    <section>
-        <h2>No te siguen</h2>
-        <article id="no-te-siguen-list"></article>
-    </section>
-
-
-    <section class="por-colores" id="contenedor-rojo">    
-        <h3> Dejar de seguir</h3>
-        <div id="rojo"></div>
-    </section>
-
-    <section class="por-colores" id="contenedor-amarillo">
-        <h3>En duda</h3>
-        <div id="amarillo"></div>
-    </section>
-
-    <section class="por-colores" id="contenedor-verde">
-        <h3>Conservar</h3>
-        <div id="verde"></div>
-    </section>
-
-    <section class="por-colores" id="contenedor-gris">
-        <h3>Sin evaluar</h3>
-        <div id="gris"></div>
-    </section>
-    <hr>    
-    <section>
-       
-        <h2 id="no-seguis">No seguís</h2>
-    </section>
-
-</div>    
-</main>
-<footer>
-<div class="melting-text-container">
-    <p class="melting-text">Instadaixo</p>
-    </div>     <p>Desarrollado por <a href="https://instadaixo.com">Instadaixo</a></p>
+    <footer>
+        <div class="melting-text-container">
+            <p class="melting-text">Instadaixo</p>
+        </div>     <p>Desarrollado por <a href="https://instadaixo.com">Instadaixo</a></p>
+    </footer>
+    
+    
 </body>
 </html>
