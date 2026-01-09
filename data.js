@@ -1,4 +1,7 @@
-import { vistaSemaforoOn, separarPorColores, reiniciarColores, vistaSemaforoOff } from './semaforo.js';
+import { cambiarEstadoSemaforo, separarPorColores, reiniciarColores, vistaSemaforoOff } from './semaforo.js';
+import {efectoContadorAnimado, animateValue, efectoContadorAnimadoEnVistasSemaforo} from './animation.js';
+import { getSepararPorColoresOn, setSepararPorColoresOn } from './main.js';
+export { compararFollowersFollowing, cargarFollowers, cargarFollowing };
 
 async function cargarFollowers() {
     try {
@@ -16,10 +19,6 @@ async function cargarFollowers() {
     catch(error){
         console.error(error)
     }
-
-    finally{
-        console.log('Hola mundo')
-    }
     
 }
 
@@ -32,39 +31,72 @@ async function cargarFollowing() {
         
         const dataFollowing = await fetchFollowing.json()
         return dataFollowing
-    //    console.log(dataFollowing)     
+        //    console.log(dataFollowing)     
     }
-
+    
     catch(error){
         console.error(error)
     }
+    
+}
+async function compararFollowersFollowing(){
+    //0. Loaders
+    const contadores = document.querySelectorAll('.counter-semaforo');
+    contadores.forEach(c => c.innerHTML = '<span class="mini-loader"></span>');
 
-    finally{
-        console.log('Hola mundo')
+    // 1. Cargar datos
+    const dataFollowers = await cargarFollowers();
+    const dataFollowing = await cargarFollowing();
+    
+    // 2. Inyectar HTML (Esto es lo que tarda en procesar el navegador)
+    const noTeSiguen = renderUsuarios(dataFollowing, dataFollowers);
+
+    // 3. Animaciones y Listeners
+    
+    userItemClickListener();
+    
+    // 4. Aplicar estados (localStorage y Semáforo)
+    restaurarEstados(); 
+    cambiarEstadoSemaforo();
+    
+    const isSemaforoOn = document.getElementById('interruptor-semaforo').checked;
+    setSepararPorColoresOn(isSemaforoOn);
+
+    if(isSemaforoOn){
+        separarPorColores();
+        const coloresEnSemaforo = actualizarResumenSemaforo();
+        efectoContadorAnimadoEnVistasSemaforo();
+        
+    } else {
+        vistaSemaforoOff();
+        efectoContadorAnimado(dataFollowers.length, dataFollowing.relationships_following.length, noTeSiguen.length, "0");
     }
+
+    // 5. EL TRUCO: requestAnimationFrame
+    // Esto espera a que el navegador termine de "pintar" los cambios anteriores
+    requestAnimationFrame(() => {
+        actualizarResumenSemaforo();
+        // document.getElementById('resumen-semaforo').style.display = 'block';
+    });
 }
 
+//mostrar un div u otro según el estado del slider!!!!!!!!!! animar solo cuando sea necesario
 
-async function compararFollowersFollowing(){
-    const dataFollowers = await cargarFollowers()
-    const dataFollowing = await cargarFollowing()
-
+const renderUsuarios = (dataFollowing, dataFollowers) => {
     const nombresFollowers = dataFollowers.map( following => following.string_list_data[0].value)
     
     const nombresFollowing = dataFollowing.relationships_following.map(following => following.title)
+    
 
-    console.log('followers' + nombresFollowers)
-    console.log('following' + nombresFollowing)
-
-
+    
     const teSiguen = nombresFollowing.filter(userName => nombresFollowers.includes(userName)) 
-
-    console.log(teSiguen)
-
+    
+    // console.log(teSiguen)
+    
     const noTeSiguen = nombresFollowing.filter(userName => !nombresFollowers.includes(userName)) 
-
-    console.log(noTeSiguen)
-
+    
+    // console.log(noTeSiguen)
+    
     const noTeSiguenConLinks = dataFollowing.relationships_following
     .filter(following => noTeSiguen.includes(following.title)).sort((a, b) => a.title.localeCompare(b.title))
     // Includes devuelve TRUE o FALSE, según si el elemento está o no en el array y va construyendo uno nuevo con aquellos elementos que sí están a partir de el array original de dataFollowing
@@ -73,55 +105,74 @@ async function compararFollowersFollowing(){
         href: user.string_list_data[0].href,
         status: "gris"
     }))
-
-
-    console.log(noTeSiguenConLinks)
-
-    document.getElementById('no-te-siguen-count').innerHTML = noTeSiguen.length
-
-    // document.getElementById('no-te-siguen-list').innerHTML = `
-    //     ${noTeSiguenConLinks.map(item => `<li id=${self.crypto.randomUUID()}><a href='${item.href}'>${item.usuario}</a>🔗<span>🚦</span></li>`).join('')}
-    // `
-
-    
+        
     document.getElementById('no-te-siguen-list').innerHTML = `
-        ${noTeSiguenConLinks.map(item => `<div class="user-item ${item.status}" id=${item.usuario}><a href='${item.href}' target="_blank">${item.usuario}</a><span class="semaforo">🚦</span>   <span class="status-dot status-red"></span>
-</div>`).join('')}
+        ${noTeSiguenConLinks.map(item => `<div class="user-item ${item.status}" id=${item.usuario}><a class="link-to-user-account" href='${item.href}' target="_blank">${item.usuario}</a><span class="semaforo">🚦</span>   <span class="status-dot status-red"></span></div>`).join('')}
     `
 
-    // const resumen = `
-    // <p>🫡 Te siguen ${dataFollowers.length} personas.</p>
-    // <p>😉 Seguís ${dataFollowing.relationships_following.length} personas.</p>
-    // <p>😩 No te siguen ${noTeSiguen.length} personas.</p>
-    // <p>🤫 No seguís a xxxx personas que te siguen.</p>
-    // `
+    return noTeSiguen
 
-    // document.getElementById('resumen').innerHTML = resumen
-    
-    efectoContadorAnimado(dataFollowers.length, dataFollowing.relationships_following.length, noTeSiguen.length)
-    
-    restaurarEstados()
-    
-    cambiarEstadoSemaforo()
 
 }
+
+//Ni de casualidad hubiera pensado eso sin IA
+const userItemClickListener = () => {
+document.getElementById('lista-de-usuarios').addEventListener('click', function(e) {
+  // ¿hicieron clic en un link dentro de un .user-item?
+  if (e.target.matches('.user-item a')) {
+    const item = e.target.closest('.user-item');
+    if (!item) return;
+
+    // desactivo todos los activos
+    this.querySelectorAll('.user-item__activo').forEach(el => {
+      el.classList.replace('user-item__activo', 'user-item');
+    });
+
+    // activo el padre del link clickeado
+    item.classList.replace('user-item', 'user-item__activo');
+  }
+})};
+
+
 
 
 
 function restaurarEstados(){
-  
+    
     const estados = JSON.parse(localStorage.getItem("estadosSemaforos")) || {}
-  
+    
     for (const id in estados) {
         const div = document.getElementById(id)
-
-    if (div) {
-      div.classList.remove("gris","rojo","amarillo","verde")
-      div.classList.add(estados[id])
+        
+        if (div) {
+            div.classList.remove("gris","rojo","amarillo","verde")
+            div.classList.add(estados[id])
+        }
     }
-  }
 }
 
-import {efectoContadorAnimado, animateValue} from './animation.js';
+const actualizarResumenSemaforo = () => {
+    // Usamos querySelectorAll para buscar CUALQUIER elemento que tenga la clase de color
+    // independientemente de si es .user-item o .user-item__activo
+    const rojos = document.querySelectorAll('.rojo').length;
+    const amarillos = document.querySelectorAll('.amarillo').length;
+    const verdes = document.querySelectorAll('.verde').length;
+    const grises = document.querySelectorAll('.gris').length;
 
-export { compararFollowersFollowing, cargarFollowers, cargarFollowing };
+    console.log("Conteo detectado -> Rojos:", rojos, "Verdes:", verdes);
+
+    // Actualización del DOM
+    const actualizarTexto = (id, valor) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = valor;
+    };
+
+    actualizarTexto('resumen-rojo', rojos);
+    actualizarTexto('resumen-amarillo', amarillos);
+    actualizarTexto('resumen-verde', verdes);
+    actualizarTexto('resumen-gris', grises);
+
+    return { rojos, amarillos, verdes, grises };
+}
+
+export {actualizarResumenSemaforo};

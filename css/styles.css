@@ -36,7 +36,7 @@ main {
     padding: 20px;
 }
 
-li, .user-item {
+li, .user-item, .user-item__activo {
     list-style: none;
     margin: 8px;
     display: inline-block;
@@ -52,11 +52,12 @@ a{
     color: #333;
 }
 
-.user-item.rojo { background-color: #ffcccc; }
-.user-item.amarillo { background-color: #fff4b3; }
-.user-item.verde { background-color: #ccffcc; }
-.user-item.gris { background-color: #fff; }
-
+[class^="user-item"].rojo { background-color: #ffcccc; }
+[class^="user-item"].amarillo { background-color: #fff4b3; }
+[class^="user-item"].verde { background-color: #ccffcc; }
+[class^="user-item"].gris { background-color: #fff; }
+/* Daixnota: [class^="user-item"] busca cualqueir clase que inicie con "user-item". En ese caso, sería lo mismo que si hiciera .user-item.rojo, .user-item__activo.rojo { background-color: #ffcccc; }
+ */
 
 button{
     background-color: #2F079C;
@@ -107,6 +108,30 @@ input[type="radio"] {
     margin: 1em
 }
 
+.user-item__activo{
+    border: 3px solid #919191d0;
+    transform: scale(1.1);
+    filter:saturate(110%);
+    margin:12px;
+    position: relative;
+}
+
+.user-item__activo::after{
+content: "";
+  opacity: 60%;
+  filter: saturate(900%);
+  border-radius: 8px;
+ position: absolute; 
+ inset: 0; 
+ background: inherit; /* copia el fondo */ 
+ /* filter: grayscale(100%) brightness(50%);  */
+ z-index: 0; 
+}
+
+
+.user-item__activo > * { position: relative; z-index: 1; /* que el texto quede arriba */ }
+
+
 /* Voy a hacer acá un botón con forma de semáforo que al presionar alterne una propiedad en html (null, rojo, amarillo, verde) al hacerle clic y ello cambie el color de borde o de fondo del div contenedor 
 
 1) crear usuario y clave
@@ -116,3 +141,17 @@ input[type="radio"] {
 5) guardar cambios en un registro de usuario
 6) subir nuevo json y contrastar cambios, eliminando los usuarios que ya no están e incorporando los nuevos*/
 
+
+.mini-loader {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(0,0,0,0.1);
+    border-top: 2px solid #555;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

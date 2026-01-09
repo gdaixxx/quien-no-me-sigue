@@ -54,27 +54,27 @@
 <section class="resumen-container" id="resumen-semaforo" style="display:none;">
     <article class="card">
         <div>🔴</div>
-        <div class="counter" id="te-siguen"></div>
+        <div class="counter-semaforo rojo-count" id="resumen-rojo">0<span class="mini-loader"></span></div>
         <div>vas a dejar de seguir</div>
     </article>
     <article class="card">
         <div>🟡</div>
-        <div class="counter" id="seguis">
-
-            <div class="new-counter">120</div>
+        <div class="counter-semaforo amarillo-count" id="resumen-amarillo">
+            <span class="mini-loader"></span>
         </div>
         <div>quizá dejes de seguir</div>
     </article>
     <article class="card">
         <div>🟢</div>
-        <div class="counter" id="no-te-siguen"></div>
+        <div class="counter-semaforo verde-count" id="resumen-verde">0<span class="mini-loader"></span></div>
         <div>vas a continuar siguiendo</div>
     </article>
     <article class="card">
         <div>⚪</div>
-        <div class="counter" id="no-seguis"></div>
+        <div class="counter-semaforo gris-count" id="resumen-gris">0<span class="mini-loader"></span></div>
         <div>no lo decidiste aún</div>
     </article>
+
 </section>
 
 
@@ -91,37 +91,41 @@
 
 </section>
 <hr>
-<section>
-    <h2>No te siguen: <span id="no-te-siguen-count">    </span></h2>
-    <article id="no-te-siguen-list"></article>
 
-</section>
+<div id="lista-de-usuarios">
+
+    <section>
+        <h2>No te siguen</h2>
+        <article id="no-te-siguen-list"></article>
+    </section>
 
 
-<section class="por-colores" id="contenedor-rojo">    
-    <h3> Dejar de seguir</h3>
-    <div id="rojo"></div>
-</section>
+    <section class="por-colores" id="contenedor-rojo">    
+        <h3> Dejar de seguir</h3>
+        <div id="rojo"></div>
+    </section>
 
-<section class="por-colores" id="contenedor-amarillo">
-    <h3>En duda</h3>
-    <div id="amarillo"></div>
-</section>
+    <section class="por-colores" id="contenedor-amarillo">
+        <h3>En duda</h3>
+        <div id="amarillo"></div>
+    </section>
 
-<section class="por-colores" id="contenedor-verde">
-    <h3>Conservar</h3>
-    <div id="verde"></div>
-</section>
+    <section class="por-colores" id="contenedor-verde">
+        <h3>Conservar</h3>
+        <div id="verde"></div>
+    </section>
 
-<section class="por-colores" id="contenedor-gris">
-    <h3>Sin evaluar</h3>
-    <div id="gris"></div>
-</section>
-<hr>    
-<section>
-    
-    <h2 id="no-seguis">No seguís</h2>
-</section>    
+    <section class="por-colores" id="contenedor-gris">
+        <h3>Sin evaluar</h3>
+        <div id="gris"></div>
+    </section>
+    <hr>    
+    <section>
+       
+        <h2 id="no-seguis">No seguís</h2>
+    </section>
+
+</div>    
 </main>
 <footer>
 <div class="melting-text-container">

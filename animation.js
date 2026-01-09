@@ -1,4 +1,4 @@
-function efectoContadorAnimado(followersCount, followingCount, noTeSiguenCount) {
+function efectoContadorAnimado(followersCount, followingCount, noTeSiguenCount, noSeguis) {
     const followersCounter = document.getElementById('te-siguen');
     const followingCounter = document.getElementById('seguis');
     const noTeSiguenCounter = document.getElementById('no-te-siguen');
@@ -7,16 +7,28 @@ function efectoContadorAnimado(followersCount, followingCount, noTeSiguenCount) 
     followersCounter.innerText = followersCount;
     followingCounter.innerText = followingCount;
     noTeSiguenCounter.innerText = noTeSiguenCount;
-    noSeguisCounter.innerText = 0;
+    noSeguisCounter.innerText = noSeguis;
 
     const contadores = document.querySelectorAll('.counter')
     
     contadores.forEach(counter => {
         const endValue = parseInt(counter.textContent, 10);
         animateValue(counter, 0, endValue, 2000);
-        console.log('Animando contador para', counter, 'hasta', endValue);
+        // console.log('Animando contador para', counter, 'hasta', endValue);
     });
 }
+
+function efectoContadorAnimadoEnVistasSemaforo() {
+    
+    const contadores = document.querySelectorAll('.counter-semaforo')
+    
+    contadores.forEach(counter => {
+        const endValue = parseInt(counter.textContent, 10);
+        animateValue(counter, 0, endValue, 2000);
+        // console.log('Animando contador para', counter, 'hasta', endValue);
+    });
+}
+
 
 
 function animateValue(obj, start, end, duration) {
@@ -38,3 +50,4 @@ function animateValue(obj, start, end, duration) {
 
 export { efectoContadorAnimado };
 export { animateValue };
+export { efectoContadorAnimadoEnVistasSemaforo };

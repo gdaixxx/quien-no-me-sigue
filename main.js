@@ -6,6 +6,8 @@
 import {compararFollowersFollowing} from './data.js';
 import {separarPorColores} from './semaforo.js';
 import {vistaSemaforoOff} from './semaforo.js';
+import {delayInColorUpdate} from './semaforo.js';
+import './semaforo.js';
 
 // variables de scope global
 
@@ -13,7 +15,7 @@ import {vistaSemaforoOff} from './semaforo.js';
 let separarPorColoresOn = false
 export { separarPorColoresOn };
 
-export function setsepararPorColoresOn(valor) {
+export function setSepararPorColoresOn(valor) {
     separarPorColoresOn = valor;
 }
 
@@ -29,7 +31,7 @@ import { interruptorSemaforo } from './semaforo.js';
 // const interruptorSemaforo = document.getElementById('interruptor-semaforo');
 // console.log(interruptorSemaforo.checked)
 // interruptorSemaforo.addEventListener('change', () => {
-//     separarPorColoresOn = interruptorSemaforo.checked
+    //     separarPorColoresOn = interruptorSemaforo.checked
 //     if(separarPorColoresOn){
 //         separarPorColores()
 //         const resumen = document.querySelector('#resumen-global');
@@ -38,13 +40,13 @@ import { interruptorSemaforo } from './semaforo.js';
 //     console.log("Encontrado", resumen);
 //     resumen.style.display = 'none';
 // } else {
-//     console.log("No se encontró el elemento");
+    //     console.log("No se encontró el elemento");
 // }
 
 //         document.querySelector('#resumen-global').style.display = 'none';
 
 //     } else{
-//         vistaSemaforoOff()
+    //         vistaSemaforoOff()
 //     }
 //     console.log(separarPorColoresOn)
 // });

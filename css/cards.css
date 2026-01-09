@@ -18,7 +18,7 @@
     text-align: center;
 }
 
-.counter, .counter2 {
+.counter, .counter-semaforo {
     position: relative;
     font-size: 2.5em;
     text-align: center;
