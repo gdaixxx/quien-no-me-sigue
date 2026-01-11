@@ -212,7 +212,7 @@ const welcomeScreen = `
                                     <label class="uploadBtn" for="input-following" id="uploadBtnFollowing">
                                         <span class=" display-inline-block material-symbols-outlined">upload</span></label>
                                         <input type="file" id="input-following" accept=".json" hidden>
-                                        <p>Subí tus SEGUIDORES <span class="exampleText">
+                                        <p>Subí tus SEGUIDOS <span class="exampleText">
                                             <br>(p.ej. Following.json)</span></p>
                                         </div>
                                     </div>

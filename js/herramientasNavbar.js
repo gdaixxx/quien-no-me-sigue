@@ -48,8 +48,9 @@ const btnAyuda = () => {
 
 
 const btnBorrar = () => {
+    
     const btn = document.getElementById("delete")
-    console.log(btn)
+    
     btn.addEventListener(
         'click',
         function (e){

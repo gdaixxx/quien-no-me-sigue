@@ -4,7 +4,7 @@ import * as UILoader from "./UILoader.js"
 import * as data from "./data.js"
 import * as toolbar from "./herramientasNavbar.js"
 import { initSemaforo } from "./semaforo.js";
-
+import * as menu from './menu.js'
 
 // Ocultar el h1 cuando termina su animación
 const presentationTitle = document.getElementById("presentation-title");
@@ -40,10 +40,7 @@ export function cargarArchivo(idInput, claveStorage) {
                 const btnLabel = document.getElementById(event.target.previousElementSibling.id)
                 btnLabel.style.backgroundColor = "green"
                 btnLabel.innerHTML = `<span class="material-symbols-outlined animate__animated animate__bounceIn">check_circle</span>`
-                
-                
-                console.log(btnLabel)
-                
+                              
                 const contenido = e.target.result;
                 
                 // Validar que sea un JSON real
@@ -51,8 +48,6 @@ export function cargarArchivo(idInput, claveStorage) {
                 
                 // Guardar como string en el localStorage
                 localStorage.setItem(claveStorage, contenido);
-                
-                console.log(`${claveStorage} guardado con éxito.`);
                 
                 verificarCargaCompleta();
                 
@@ -91,14 +86,6 @@ function verificarCargaCompleta() {
     }
 }
 
-
-// Inicialización de listeners (se ejecutan después de que el DOM esté listo)
-document.addEventListener('DOMContentLoaded', () => {
-    cargarArchivo('input-followers', 'followers_data');
-    cargarArchivo('input-following', 'following_data');
-});
-
-
 // Handler del botón submit: carga la interfaz de usuario y ejecuta comparación de datos para su inmediato renderizado
 export function subtimBtnHandler(){
     const submitBtn = document.getElementById("submitBtn");
@@ -112,5 +99,8 @@ export function subtimBtnHandler(){
         toolbar.btnAyuda()
         toolbar.btnBorrar()
         initSemaforo()
+        menu.hamburgerBtnToggle()
+        menu.checkWidth()
+        window.addEventListener("resize", menu.checkWidth)  
     })
 }

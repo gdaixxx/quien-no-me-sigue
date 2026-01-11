@@ -170,8 +170,6 @@ const reiniciarColores = () => {
     export function initSemaforo() {
         const interruptorSemaforo = document.getElementById('interruptor-semaforo');
 
-        console.log("¿Existe el interruptor?:", interruptorSemaforo);
-
         if (!interruptorSemaforo) return;
 
         interruptorSemaforo.addEventListener('change', () => {

@@ -123,6 +123,7 @@ button:disabled{
     min-height: 100vh;
     position: absolute;
     width: 100%;
+    text-align: center;
 }
 
 .keyword-con-link{

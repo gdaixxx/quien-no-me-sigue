@@ -109,7 +109,7 @@ function cleaningScreebTransition() {
                 <div>
                     <img style="border-radius: 50%; max-width: 400px;" src="./assets/chatbot.gif" alt="Chatbot">
                 </div>
-                <div>Gracias por usarme, como tu ex</div>`;
+                <div style="margin-left:1em">Gracias por usarme,<br> como tu ex</div>`;
             
             // Subimos la cortina
             curtain.classList.add('active');

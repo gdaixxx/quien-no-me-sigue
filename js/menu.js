@@ -22,14 +22,13 @@ const navbar = document.querySelector(".encabezado");
 
 // Toggle menú hamburguesa
 export function hamburgerBtnToggle(){
+    const navbarIcons = document.querySelector(".herramientas");
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const hamburgerMenu = document.getElementById("hamburgerMenu");
+    const navbar = document.querySelector(".encabezado");
 
-const navbarIcons = document.querySelector(".herramientas");
-const hamburgerBtn = document.getElementById("hamburgerBtn");
-const hamburgerMenu = document.getElementById("hamburgerMenu");
-const navbar = document.querySelector(".encabezado");
-
-  hamburgerBtn.addEventListener("click", () => {
-   hamburgerMenu.style.display =
-     hamburgerMenu.style.display === "none" ? "block" : "none";
- });
+      hamburgerBtn.addEventListener("click", () => {
+      hamburgerMenu.style.display =
+        hamburgerMenu.style.display === "none" ? "block" : "none";
+    });
 }
