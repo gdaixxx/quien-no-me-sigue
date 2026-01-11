@@ -4,13 +4,21 @@ import {separarPorColores} from './semaforo.js';
 import {vistaSemaforoOff} from './semaforo.js';
 import {delayInColorUpdate} from './semaforo.js';
 import './semaforo.js';
-import {btnBorrarColores, btnAyuda} from './herramientasNavbar.js'
-import { interruptorSemaforo } from './semaforo.js';
+import {btnBorrarColores, btnAyuda, btnBorrar} from './herramientasNavbar.js'
+import { initSemaforo } from './semaforo.js'
+// import { interruptorSemaforo } from './semaforo.js';
 import { alerta } from './alertas.js';
+import * as UILoader from "./UILoader.js"
+import * as initScreen from './pantallaDeInicio.js'
+import * as menu from './menu.js'
+
 
 // Exports
 let timeout = null
+
+// Setter y getter del semáforo
 let separarPorColoresOn = false
+
 export { separarPorColoresOn };
 
 export function setSepararPorColoresOn(valor) {
@@ -22,37 +30,34 @@ export function getSepararPorColoresOn() {
 }
 
 // Renderizado inicial
-compararFollowersFollowing()
-btnBorrarColores()
-btnAyuda()
 
-const navbarIcons = document.querySelector(".herramientas");
-const hamburgerBtn = document.getElementById("hamburgerBtn");
-const hamburgerMenu = document.getElementById("hamburgerMenu");
-const navbar = document.querySelector(".encabezado");
+function renderizadoInicial() {
+  if (localStorage.getItem("following_data") === null || localStorage.getItem("followers_data") === null){
+    UILoader.loadWelcomeScreen()
+    initScreen.titleAnimationHandler()
+    console.log("Hola")
+    initScreen.cargarArchivo('input-followers', 'followers_data')
+    initScreen.cargarArchivo('input-following', 'following_data')
+    initScreen.subtimBtnHandler()
 
-// Función para revisar ancho
-function checkWidth() {
-  if (window.innerWidth < 500) {
-    hamburgerBtn.style.display = "block";
-    hamburgerMenu.appendChild(navbarIcons); // mueve los íconos al menú
-    navbarIcons.style.display = "flex"; // asegurar que sea visible en el menú
   } else {
-    hamburgerBtn.style.display = "none";
-    if (navbar && navbarIcons.parentElement !== navbar) {
-      navbar.appendChild(navbarIcons); // devuelve los íconos a la navbar
-    }
-    navbarIcons.style.display = "flex";
-    hamburgerMenu.style.display = "none";
+    UILoader.loadUI()
+    initSemaforo()
+    btnBorrarColores()
+    btnAyuda()
+    compararFollowersFollowing()
+    btnBorrarColores()
+    btnAyuda()
+    btnBorrar()
+    hamburgerBtnToggle()
+    window.addEventListener("resize", checkWidth)
+    menu.checkWidth()
+    menu.hamburgerBtnToggle()
   }
+
 }
 
-// Toggle menú hamburguesa
-hamburgerBtn.addEventListener("click", () => {
-  hamburgerMenu.style.display =
-    hamburgerMenu.style.display === "none" ? "block" : "none";
-});
 
-// Ejecutar al cargar y al redimensionar
-window.addEventListener("resize", checkWidth);
-checkWidth();
+
+
+renderizadoInicial()

@@ -121,7 +121,8 @@ button:disabled{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    z-index: 2;
+    position: absolute;
+    width: 100%;
 }
 
 .keyword-con-link{

@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="./css/toolbar.css">
     <link rel="stylesheet" href="./css/modal.css">  
     <link rel="stylesheet" href="./css/login.css">  
+    <!-- <script type="module" src="./main.js" defer></script> -->
+    <script type="module" src="./pantallaDeInicio.js" defer></script>
+    
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -22,12 +25,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     
 </head>
-<body>
+<body id="body">
     <div id="presentation-title-wrapper">
         <h1 class="animate__bounceOutDown animate__delay-2s animate__animated" id="presentation-title">Clasificador de&nbsp;seguidores</h1>
     </div>
     
-    <div class="wrapper animate__animated animate__slideInRight animate__delay-3s">
+    <div class="animate__animated wrapper animate__slideInRight animate__delay-3s">
         
         <!-- 
         <div class="carga-container-wrapper"></div> -->
@@ -78,98 +81,4 @@
                     </div>
                 </div>     
             </body>
-            <script>
-                
-                // Ocultar el h1 cuando termina su animación
-                const presentationTitle = document.getElementById("presentation-title");
-                if (presentationTitle) {
-                    presentationTitle.addEventListener("animationend", () => {
-                        presentationTitle.parentElement.style.display = "none";
-                    });
-                }
-                
-                // Función para procesar el archivo y guardarlo
-                const submitBtn = document.getElementById("submitBtn")
-                submitBtn.disabled = true
-                
-                function cargarArchivo(idInput, claveStorage) {
-                    const input = document.getElementById(idInput);
-                    
-                    input.addEventListener('change', (event) => {
-                        const archivo = event.target.files[0];
-                        if (!archivo) return;
-                        
-                        // const btnId = event.target
-                        const lector = new FileReader();
-                        
-                        lector.onload = (e) => {
-                            
-                            try {
-                                
-                                const btnLabel = document.getElementById(event.target.previousElementSibling.id)
-                                btnLabel.style.backgroundColor = "green"
-                                btnLabel.innerHTML = `<span class="material-symbols-outlined animate__animated animate__bounceIn">check_circle</span>`
-                                
-                                
-                                console.log(btnLabel)
-                                
-                                const contenido = e.target.result;
-                                // Validamos que sea un JSON real
-                                JSON.parse(contenido); 
-                                
-                                // Guardamos el string puro en el localStorage
-                                localStorage.setItem(claveStorage, contenido);
-                                
-                                console.log(`${claveStorage} guardado con éxito.`);
-                                
-                                verificarCargaCompleta();
-                                
-                            } catch (error) {
-                                
-                                const btnLabel = document.getElementById(event.target.previousElementSibling.id)
-                                
-                                btnLabel.style.backgroundColor = "red"
-                                
-                                btnLabel.innerHTML = `
-                    <span class="material-symbols-outlined animate__animated animate__shakeX">error</span>`
-                                
-                                alert("El archivo no es un JSON válido");
-                            }
-                        };
-                        
-                        lector.readAsText(archivo);
-                        
-                    });
-                }
-                
-                
-                function verificarCargaCompleta() {
-                    
-                    const followers = localStorage.getItem('followers_data');
-                    
-                    const following = localStorage.getItem('following_data');
-                    
-                    
-                    if (followers && following) {
-                        submitBtn.disabled = false
-                        submitBtn.classList.add("animate__animated", "animate__flash")
-                    } else{
-                        submitBtn.disabled = true
-                    }
-                }
-                
-                
-                // Inicializamos los escuchadores
-                cargarArchivo('input-followers', 'followers_data');
-                cargarArchivo('input-following', 'following_data');
-                // boton
-                function subtimBtnHandler(){
-                    document.getElementById("submitBtn").addEventListener('click', (e) => {
-                        console.log(typeof(localStorage.getItem("followers_data")));
-                    })
-                }
-                
-                subtimBtnHandler()
-
-            </script>
             </html>

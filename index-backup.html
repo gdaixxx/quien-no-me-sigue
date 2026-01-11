@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Instadaixo Social Stats</title>
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/toggle-btn.css">
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/text-effects.css">
+    <link rel="stylesheet" href="./css/toolbar.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <script type="module" src="./main.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script defer>
+        window.addEventListener('load', function() {
+            AOS.init();
+        });
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Irish+Grover&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monsieur+La+Doulaise&family=Montserrat&family=Open+Sans:wght@600&family=Pixelify+Sans:wght@400..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Sixtyfour+Convergence&family=Tilt+Prism&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <header>
+
+        <div class="encabezado">
+ 
+            <button id="hamburgerBtn" style="display:none;">☰</button>
+ 
+            <h1 class="brand-name">Clasificador de&nbsp;seguidores</h1>
+
+            <div class="herramientas">
+
+                <div class="toolbox">
+                    
+                    <div class="tooltip">
+                        <span class="material-symbols-outlined toolbar-tool" id="btn-borrar-colores">format_color_reset</span>
+                        <span class="tooltiptext">Reiniciar colores</span>
+                    </div>
+                    
+                    <div class="tooltip" id="help">
+                        <span class="material-symbols-outlined toolbar-tool">help</span>
+                        <span class="tooltiptext">Cómo funciona</span>
+                    </div>
+                                        
+                    <div class="tooltip">
+                        <span class="material-symbols-outlined toolbar-tool danger">delete</span>
+                        <span class="tooltiptext">Eliminar datos</span>
+                    </div>
+                </div>  
+                
+                <div class="separador-vertical">&nbsp;</div>
+
+
+                <div id="bloque-interruptor">
+                    <div id="contenedorIconoSemaforo">
+                        <span class="material-symbols-outlined" id="icono-semaforo">traffic</span>
+                    </div>
+                    
+                    <label class="switch tooltip">
+                        <input type="checkbox" id="interruptor-semaforo">
+                        <span class="slider round"></span>
+                        <span class="tooltiptext">Modo semáforo <br>ON/OFF</span>
+                    </label>
+                </div>
+                
+            </div>
+            
+                <div id="hamburgerMenu" style="display:none;"></div>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="resumen-containers-wrapper">
+            <section class="resumen-container" id="resumen-global">
+
+                <article class="card">
+                    <div class="card-emoji">🫡</div>
+                    <div class="counter" id="te-siguen"></div>
+                    <div class="card-label">te siguen</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">😉</div>
+                    <div class="counter" id="seguis">
+                        <div class="new-counter"></div>
+                    </div>
+                    <div class="card-label">seguís</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">😩</div>
+                    <div class="counter" id="no-te-siguen"></div>
+                    <div class="card-label">no te siguen</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-emoji">🤫</div>
+                    <div class="counter" id="no-seguis-counter"></div>
+                    <div class="card-label">no seguís</div>
+                </article>
+
+            </section>
+            <section class="resumen-container" id="resumen-semaforo" style="display:none;">
+                <article class="card">
+                    <div class="card-emoji">🔴</div>
+                    <div class="counter-semaforo rojo-count" id="resumen-rojo">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Dejar de seguir</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">🟡</div>
+                    <div class="counter-semaforo amarillo-count" id="resumen-amarillo">
+                        <span class="mini-loader"></span>
+                    </div>
+                    <div class="card-label">En duda</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">🟢</div>
+                    <div class="counter-semaforo verde-count" id="resumen-verde">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Conservar</div>
+                </article>
+                <article class="card">
+                    <div class="card-emoji">⚪</div>
+                    <div class="counter-semaforo gris-count" id="resumen-gris">0<span class="mini-loader"></span></div>
+                    <div class="card-label">Sin evaluar</div>
+                </article>
+                
+            </section>
+        </div>
+        
+        <div class="separador-horizontal">    </div>
+        
+        <div id="lista-de-usuarios">
+            
+            <section>
+                <h2>No te siguen</h2>
+                <article id="no-te-siguen-list"></article>
+            </section>
+            
+            <div class="semaforo-grid-wrapper">
+                
+                <section class="por-colores" id="contenedor-rojo">    
+                    <h3> Dejar de seguir</h3>
+                    <div id="rojo"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-amarillo">
+                    <h3>En duda</h3>
+                    <div id="amarillo"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-verde">
+                    <h3>Conservar</h3>
+                    <div id="verde"></div>
+                </section>
+                
+                <section class="por-colores" id="contenedor-gris">
+                    <h3>Sin evaluar</h3>
+                    <div id="gris"></div>
+                </section>
+            </div>
+            <div class="separador-horizontal">    </div>
+            <div class="divisor2"></div>
+            <section class="">
+                
+                <h2 id="no-seguis-header">No seguís</h2>
+                
+                <div id="no-seguis-list" class="no-seguis-container-wrapper">
+
+                </div>
+            </section>
+            
+        </div>    
+    </main>
+    
+    <footer>
+
+        <div class="melting-text-container">
+            <p class="melting-text">Instadaixo</p>
+        </div>     <p>Desarrollado por <a href="https://instadaixo.com">Instadaixo</a></p>
+
+    </footer>
+        
+</body>
+
+</html>

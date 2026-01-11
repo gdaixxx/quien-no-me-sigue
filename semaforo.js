@@ -1,5 +1,4 @@
 export { cambiarEstadoSemaforo, separarPorColores, reiniciarColores, vistaSemaforoOff };
-export {interruptorSemaforo, delayInColorUpdate}
 import {setSepararPorColoresOn, getSepararPorColoresOn} from "./main.js";
 import { actualizarResumenSemaforo } from "./data.js";
 
@@ -94,7 +93,7 @@ function separarPorColores(){
     
     
     
-const delayInColorUpdate = () => {
+export const delayInColorUpdate = () => {
         // Si ya había un timeout pendiente, lo cancelo
         if (timeout) {
             clearTimeout(timeout);
@@ -167,24 +166,27 @@ const reiniciarColores = () => {
     
     
     
-    // Interruptor vista de semaforo
-    const interruptorSemaforo = document.getElementById('interruptor-semaforo');
-    
-    interruptorSemaforo.addEventListener('change', () => {
-        
-        setSepararPorColoresOn(interruptorSemaforo.checked)
-        
+    // Inicializador que enlaza el interruptor (debe llamarse después de renderizar la UI)
+    export function initSemaforo() {
+        const interruptorSemaforo = document.getElementById('interruptor-semaforo');
 
-       quitarDestacado()
+        console.log("¿Existe el interruptor?:", interruptorSemaforo);
 
-        if(getSepararPorColoresOn()){
-            separarPorColores()
-            actualizarResumenSemaforo()
-        } else{
-            vistaSemaforoOff()
-        }
-        
-    });
+        if (!interruptorSemaforo) return;
+
+        interruptorSemaforo.addEventListener('change', () => {
+            setSepararPorColoresOn(interruptorSemaforo.checked)
+
+            quitarDestacado()
+
+            if(getSepararPorColoresOn()){
+                separarPorColores()
+                actualizarResumenSemaforo()
+            } else{
+                vistaSemaforoOff()
+            }
+        });
+    }
     
 
     //sacar de main

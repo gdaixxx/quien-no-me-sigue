@@ -94,6 +94,7 @@ html, body {
 p {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
 h2 {
     display: inline-block;
     color: #333; /* O blanco si el fondo es oscuro */

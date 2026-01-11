@@ -1,10 +1,11 @@
+// Función para revisar ancho
+export function checkWidth() {
+
 const navbarIcons = document.querySelector(".herramientas");
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const hamburgerMenu = document.getElementById("hamburgerMenu");
 const navbar = document.querySelector(".encabezado");
 
-// Función para revisar ancho
-function checkWidth() {
   if (window.innerWidth < 500) {
     hamburgerBtn.style.display = "block";
     hamburgerMenu.appendChild(navbarIcons); // mueve los íconos al menú
@@ -20,11 +21,15 @@ function checkWidth() {
 }
 
 // Toggle menú hamburguesa
-hamburgerBtn.addEventListener("click", () => {
-  hamburgerMenu.style.display =
-    hamburgerMenu.style.display === "none" ? "block" : "none";
-});
+export function hamburgerBtnToggle(){
 
-// Ejecutar al cargar y al redimensionar
-window.addEventListener("resize", checkWidth);
-checkWidth();
+const navbarIcons = document.querySelector(".herramientas");
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const hamburgerMenu = document.getElementById("hamburgerMenu");
+const navbar = document.querySelector(".encabezado");
+
+  hamburgerBtn.addEventListener("click", () => {
+   hamburgerMenu.style.display =
+     hamburgerMenu.style.display === "none" ? "block" : "none";
+ });
+}
