@@ -6,18 +6,77 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        // if(localStorage.getItem("followers_data")){
-        //     console.log("TRUE")
-        // }
 
-        // if (localStorage.getItem("pepito" === null)){
-        //     console.log("FALSO")
-        // }
+<script>
 
-        console.log(localStorage.getItem("following_data") === null || localStorage.getItem("followers_data") === null)
-        // const data1 = localStorage.getItem("followers_data")
-        // console.log(data1)
+const abrirModal = (titulo, cuerpo) => {
+    // 1. Creamos el elemento dialog
+    const modal = document.createElement('dialog');
+    modal.id = 'modal-dinamico';
+    modal.className = 'modal';
+
+    // 2. Inyectamos el contenido HTML
+    modal.innerHTML = `
+        <div class="modal-header">
+            <h2>${titulo}</h2>
+            <span class="close-modal material-symbols-outlined" id="close-x">close</span>
+        </div>
+        <div class="modal-body">
+            ${cuerpo}
+        </div>
+        <div class="modal-footer">
+            <button class="btn-entendido" id="btn-ok">¡Entendido!</button>
+        </div>
+    `;
+
+    // 3. Lo añadimos al DOM
+    document.body.appendChild(modal);
+
+    // 4. Abrimos el modal
+    modal.showModal();
+
+    // 5. Función para cerrar y ELIMINAR del DOM
+    const destruirModal = () => {
+        modal.close();
+        modal.remove(); // Aquí es donde desaparece por completo del HTML
+    };
+
+    // 6. Eventos de cierre
+    modal.querySelector('#close-x').onclick = destruirModal;
+    modal.querySelector('#btn-ok').onclick = destruirModal;
+    
+    // Cerrar al hacer clic fuera (en el backdrop)
+    modal.onclick = (e) => {
+        if (e.target === modal) destruirModal();
+    };
+};
+
+const menaje = `
+
+<video src="./assets/tutorialJSONdownload.mp4" 
+           controls 
+           style="width: 100%; border-radius: 8px;"
+           poster="./assets/miniatura-video.jpg">
+    </video>
+<div class="tutorial-container">
+        <div class="step-box">
+            <p><strong>1.</strong> Entra a tu perfil de Instagram y ve a <strong>Menú > Centro de cuentas</strong>.</p>
+        </div>
+        <div class="step-box">
+            <p><strong>2.</strong> Busca <strong>Tu información y permisos</strong> y elige <strong>Exportar tu información</strong>.</p>
+        </div>
+        <div class="step-box">
+            <p><strong>3.</strong> Elige <strong>Exportar al dispositivo</strong> y en "Personalizar" selecciona <strong>solo Seguidores y seguidos</strong>.</p>
+        </div>
+        <div class="step-box highlight">
+            <p><strong>4. ¡CLAVE!</strong> Cambia el Formato de <strong>HTML a JSON</strong> e inicia la exportación.</p>
+        </div>
+        <div class="info-footer">
+            <p>📧 Te llegará un mail de Meta con el archivo en unas horas.</p>
+        </div>
+    </div>
+`
+abrirModal("Video", menaje)
     </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 import * as UILoader from "./UILoader.js"
 import * as data from "./data.js"
 import * as toolbar from "./herramientasNavbar.js"
+import { initSemaforo } from "./semaforo.js";
 
 
 // Ocultar el h1 cuando termina su animación
@@ -110,5 +111,6 @@ export function subtimBtnHandler(){
         toolbar.btnBorrarColores()
         toolbar.btnAyuda()
         toolbar.btnBorrar()
+        initSemaforo()
     })
 }

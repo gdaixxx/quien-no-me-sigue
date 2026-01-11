@@ -11,7 +11,7 @@ import { alerta } from './alertas.js';
 import * as UILoader from "./UILoader.js"
 import * as initScreen from './pantallaDeInicio.js'
 import * as menu from './menu.js'
-
+import {ayudaHandler} from './help.js'
 
 // Exports
 let timeout = null
@@ -39,6 +39,7 @@ function renderizadoInicial() {
     initScreen.cargarArchivo('input-followers', 'followers_data')
     initScreen.cargarArchivo('input-following', 'following_data')
     initScreen.subtimBtnHandler()
+    ayudaHandler()   
 
   } else {
     UILoader.loadUI()

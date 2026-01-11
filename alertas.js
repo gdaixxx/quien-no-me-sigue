@@ -20,7 +20,6 @@ const alerta = (titulo, texto, tituloConfirmacion, textoConfirmacion, funcion) =
 
         funcion()
 
-        // test()
     }
 });
 }

@@ -196,7 +196,7 @@ const welcomeScreen = `
                 <div class="content">
                     <h2>¿Querés saber quiénes <i>no</i> te siguen en Instagram?</h2>
                     <div class="text-intro-wrapper">
-                        <p>Esta aplicación te da una mano para que accedas de forma rápida y sencilla a esta información. Para ello tendrás que obtener dos archivos de tu red social (<span class="keyword-con-link">acá</span> te mostramos cómo) y subirlos en el orden correcto a continuación.</p>
+                        <p>Esta aplicación te da una mano para que accedas de forma rápida y sencilla a esta información. Para ello tendrás que obtener dos archivos de tu red social (<span id="ayuda" class="keyword-con-link">acá</span> te mostramos cómo) y subirlos en el orden correcto a continuación.</p>
                         <p>¿Preocupado por tu información? ¡No lo estés! Esta app es "segura". Tus datos se procesan directamente en tu dispositivo, sin necesidad de darnos acceso a tu cuenta, y podés borrar tu información con un simple paso cuando lo desees.</p>
                     </div>
                     <div class="carga">
