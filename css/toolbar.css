@@ -1,0 +1,148 @@
+/* Toolbar */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;  
+}
+
+.tooltip{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    overflow: visible; /* allow tooltip to render outside parent bounds */
+}
+
+.tooltiptext{
+    font-size: 0.85rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    max-width: 220px;
+    white-space: normal;
+    background-color: white;
+    color: var(--primary-color);
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 8px;
+    position: absolute;
+    z-index: 9999;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.tooltiptext::after{
+    content: '';
+    position: absolute;
+    bottom: 100%; /* coloca arrow */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+
+.tooltip:hover .tooltiptext{
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.toolbar-tool:hover{
+    color: var(--secondary-color);
+    /* filter: drop-shadow(0 0 0.4rem white); */
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transform: translateY(4px);
+    transition: transform 0.3s ease;
+    background-color: white;
+}
+
+
+.danger:hover{
+    color: var(--danger-color) !important;
+    /* filter: drop-shadow(0 0 0.2rem white); */
+    border-radius: 8px;
+    padding: 4px;
+    background-color: white;
+}
+
+
+.herramientas{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.toolbox{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 150px;
+    justify-content:space-around;
+    align-items: ;
+}
+
+
+#bloque-interruptor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+} 
+
+
+#icono-semaforo{
+    cursor:none;
+    
+  background-color: var(--primary-color);
+  border-radius: 100%;
+  border: 6px solid var(--primary-color);;
+}
+
+
+#bloque-interruptor:has(#interruptor-semaforo:checked) #icono-semaforo {
+  color: var(--light-blue);
+  background-color: white;
+  border-radius: 100%;
+  border: 6px solid white;
+}
+
+
+/* Menu hamburguesa  */
+#hamburgerBtn {
+  font-size: 1.5rem;
+  background: none;
+  border: solid white 1px;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-right: 20px;
+  z-index: 10001;
+}
+
+#hamburgerBtn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+#hamburgerMenu {
+  position: absolute;
+  /* top: 100%; */
+  /* right: 0; */
+  left: 60px;
+  background: rgb(255, 255, 255);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 10001;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  color: var(--primary-color);
+  margin-top: 4px;
+  width: 300px;
+  height: 60px;
+}
+

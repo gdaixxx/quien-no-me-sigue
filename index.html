@@ -8,9 +8,17 @@
     <link rel="stylesheet" href="./css/toggle-btn.css">
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/text-effects.css">
+    <link rel="stylesheet" href="./css/toolbar.css">
     <link rel="stylesheet" href="./css/modal.css">
-    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script type="module" src="./main.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script defer>
+        window.addEventListener('load', function() {
+            AOS.init();
+        });
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -19,7 +27,6 @@
 </head>
 <body>
     <header>
-        
         <div class="encabezado">
  
             <button id="hamburgerBtn" style="display:none;">☰</button>
@@ -95,7 +102,7 @@
 
                 <article class="card">
                     <div class="card-emoji">🤫</div>
-                    <div class="counter" id="no-seguis"></div>
+                    <div class="counter" id="no-seguis-counter"></div>
                     <div class="card-label">no seguís</div>
                 </article>
 
@@ -159,10 +166,14 @@
                 </section>
             </div>
             <div class="separador-horizontal">    </div>
-            
-            <section>
+            <div class="divisor2"></div>
+            <section class="">
                 
-                <h2 id="no-seguis">No seguís</h2>
+                <h2 id="no-seguis-header">No seguís</h2>
+                
+                <div id="no-seguis-list" class="no-seguis-container-wrapper">
+
+                </div>
             </section>
             
         </div>    

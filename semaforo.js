@@ -142,19 +142,24 @@ const reiniciarColores = () => {
     };
     
     const vistaSemaforoOff = () => {
-        const contenedor = document.getElementById('no-te-siguen-list');
-        const usuarios = Array.from(document.querySelectorAll('.user-item')); 
+        const contenedorNoTeSiguen = document.getElementById('no-te-siguen-list');
+        const contenedorNoSeguis = document.getElementById('no-seguis-list');
+        const usuarios = Array.from(document.querySelectorAll('.user-item'));
+        const noSeguidos = Array.from(document.querySelectorAll('.user-item-no-seguido')); 
         
-        usuarios.sort((a, b) => a.id.localeCompare(b.id));
+        // Limpia ambos contenedores
+        contenedorNoTeSiguen.innerHTML = '';
+        contenedorNoSeguis.innerHTML = '';
         
-        contenedor.innerHTML = '';
-        
-        usuarios.forEach(item => contenedor.appendChild(item));
-        
+        usuarios.forEach(item => {contenedorNoTeSiguen.appendChild(item);});
+        noSeguidos.forEach (item => {contenedorNoSeguis.appendChild(item);})
+
         document.querySelectorAll('.por-colores').forEach(el => {el.style.display = 'none';}) 
         
         document.getElementById('resumen-global').style.display = 'grid';
         document.getElementById('resumen-semaforo').style.display = 'none'
+        document.getElementById('no-seguis-list').style.display = 'flex'
+
         
         setSepararPorColoresOn(false);
         

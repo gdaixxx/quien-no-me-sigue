@@ -15,7 +15,7 @@ function renderizarResumen(followersCount, followingCount, noTeSiguenCount, noSe
     const followersCounter = document.getElementById('te-siguen');
     const followingCounter = document.getElementById('seguis');
     const noTeSiguenCounter = document.getElementById('no-te-siguen');
-    const noSeguisCounter = document.getElementById('no-seguis');
+    const noSeguisCounter = document.getElementById('no-seguis-counter');
 
     followersCounter.innerText = followersCount;
     followingCounter.innerText = followingCount;

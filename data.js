@@ -52,7 +52,7 @@ async function compararFollowersFollowing(){
     const dataFollowing = await cargarFollowing();
     
     // 2. Inyectar HTML (Esto es lo que tarda en procesar el navegador)
-    const noTeSiguen = renderUsuarios(dataFollowing, dataFollowers);
+    const comparacionSeguidoresYSeguidos = renderUsuarios(dataFollowing, dataFollowers);
 
     // 3. Animaciones y Listeners
     
@@ -65,7 +65,8 @@ async function compararFollowersFollowing(){
     const isSemaforoOn = document.getElementById('interruptor-semaforo').checked;
     setSepararPorColoresOn(isSemaforoOn);
 
-    renderizarResumen(dataFollowers.length, dataFollowing.relationships_following.length, noTeSiguen.length, "0");
+
+    renderizarResumen(dataFollowers.length, dataFollowing.relationships_following.length, comparacionSeguidoresYSeguidos.noTeSiguen.length, comparacionSeguidoresYSeguidos.noSeguis.length);
     actualizarResumenSemaforo();
 
     if(isSemaforoOn){
@@ -77,18 +78,10 @@ async function compararFollowersFollowing(){
          efectoContadorAnimado() 
     }
 
-    // 5. EL TRUCO: requestAnimationFrame
-    // Esto espera a que el navegador termine de "pintar" los cambios anteriores
-    // requestAnimationFrame(() => {
-    //     actualizarResumenSemaforo();
-    //     // document.getElementById('resumen-semaforo').style.display = 'block';
-    // });
 }
 
-//mostrar un div u otro según el estado del slider!!!!!!!!!! animar solo cuando sea necesario
-
 const renderUsuarios = (dataFollowing, dataFollowers) => {
-    const nombresFollowers = dataFollowers.map( following => following.string_list_data[0].value)
+    const nombresFollowers = dataFollowers.map(following => following.string_list_data[0].value)
     
     const nombresFollowing = dataFollowing.relationships_following.map(following => following.title)
     
@@ -101,6 +94,10 @@ const renderUsuarios = (dataFollowing, dataFollowers) => {
     const noTeSiguen = nombresFollowing.filter(userName => !nombresFollowers.includes(userName)) 
     
     // console.log(noTeSiguen)
+
+    const noSeguis = nombresFollowers.filter(userName => !nombresFollowing.includes(userName))
+
+    //console.log(noSeguis)
     
     const noTeSiguenConLinks = dataFollowing.relationships_following
     .filter(following => noTeSiguen.includes(following.title)).sort((a, b) => a.title.localeCompare(b.title))
@@ -112,10 +109,29 @@ const renderUsuarios = (dataFollowing, dataFollowers) => {
     }))
         
     document.getElementById('no-te-siguen-list').innerHTML = `
-        ${noTeSiguenConLinks.map(item => `<div class="user-item ${item.status}" id=${item.usuario}><a class="link-to-user-account" href='${item.href}' target="_blank">${item.usuario}</a><span class="semaforo">🚦</span>   <span class="status-dot status-red"></span></div>`).join('')}
+        ${noTeSiguenConLinks.map(item => `<div class="user-item ${item.status}" id="user-${item.usuario}"><a class="link-to-user-account" href='${item.href}' target="_blank">${item.usuario}</a><span class="semaforo">🚦</span>   <span class="status-dot status-red"></span></div>`).join('')}
     `
 
-    return noTeSiguen
+   // console.log(dataFollowers)
+
+     const noSeguisConLinks = dataFollowers
+        .filter(follower => noSeguis.includes(follower.string_list_data[0].value))
+        .sort((a, b) => a.string_list_data[0].value.localeCompare(b.string_list_data[0].value))
+        .map(
+            user => ({
+                usuario: user.string_list_data[0].value,
+                href: user.string_list_data[0].href,
+                
+            })
+        )
+
+    console.log("noSeguis:", noSeguis, "noSeguisConLinks:", noSeguisConLinks);
+
+    document.getElementById('no-seguis-list').innerHTML = `
+        ${noSeguisConLinks.map(item => `<div class="user-item-no-seguido ${item.status}" id="user-${item.usuario}"><a class="link-to-user-account" href='${item.href}' target="_blank">${item.usuario}</a></div>`).join('')}
+    `
+
+    return {noTeSiguen, noSeguis}
 
 
 }
@@ -143,7 +159,13 @@ function restaurarEstados(){
     const estados = JSON.parse(localStorage.getItem("estadosSemaforos")) || {}
     
     for (const id in estados) {
-        const div = document.getElementById(id)
+        // Intenta encontrar el elemento con el ID como está guardado
+        let div = document.getElementById(id);
+        
+        // Si no lo encuentra, intenta con el prefijo user-
+        if (!div && !id.startsWith('user-')) {
+            div = document.getElementById(`user-${id}`);
+        }
         
         if (div) {
             div.classList.remove("gris","rojo","amarillo","verde")
