@@ -19,7 +19,7 @@ function cargarFollowing() {
     }
     
 
-async function compararFollowersFollowing(){
+function compararFollowersFollowing(){
     //0. Loaders
     // const contadores = document.querySelectorAll('.counter-semaforo');
     // contadores.forEach(c => c.innerHTML = '<span class="mini-loader"></span>');
@@ -58,11 +58,10 @@ async function compararFollowersFollowing(){
 }
 
 const renderUsuarios = (dataFollowing, dataFollowers) => {
-    const nombresFollowers = dataFollowers.map(following => following.string_list_data[0].value)
+    const nombresFollowers = dataFollowers.map(followers => followers.string_list_data[0].value)
     
     const nombresFollowing = dataFollowing.relationships_following.map(following => following.title)
-    
-    
+        
     const teSiguen = nombresFollowing.filter(userName => nombresFollowers.includes(userName)) 
       
     const noTeSiguen = nombresFollowing.filter(userName => !nombresFollowers.includes(userName)) 

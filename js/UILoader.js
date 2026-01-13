@@ -165,9 +165,9 @@ const UI = `
     
     <footer>
 
-        <div class="melting-text-container">
+        <div class="melting-text-container style="padding:0.5em">
             <p class="melting-text">Instadaixo</p>
-        </div>     <p>Desarrollado por <a href="https://instadaixo.com">Instadaixo</a></p>
+        </div>     <p>Desarrollado por <a style="color: white; text-decoration: none" href="https://www.instagram.com/gastondaix/">Instadaixo</a> © 2026</p>
 
     </footer>
 `

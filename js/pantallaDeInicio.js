@@ -10,8 +10,10 @@ import * as menu from './menu.js'
 const presentationTitle = document.getElementById("presentation-title");
 
 export function titleAnimationHandler(){
+
     if(presentationTitle){
         presentationTitle.addEventListener("animationend", () => {
+            console.log("Hola Lolo")
             presentationTitle.parentElement.style.display = "none";
         });
         

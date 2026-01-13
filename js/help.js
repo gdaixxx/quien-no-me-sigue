@@ -9,16 +9,16 @@ const ayudaDescargaJSON = `
     </video>
 <div class="tutorial-container">
         <div class="step-box">
-            <p><strong>1.</strong> Entra a tu perfil de Instagram y ve a <strong>Menú > Centro de cuentas</strong>.</p>
+            <p><strong>1.</strong> Entrá a tu perfil de Instagram y accedé a <strong>Menú > Centro de cuentas</strong>.</p>
         </div>
         <div class="step-box">
-            <p><strong>2.</strong> Busca <strong>Tu información y permisos</strong> y elige <strong>Exportar tu información</strong>.</p>
+            <p><strong>2.</strong> Buscá <strong>Tu información y permisos</strong> y elegí <strong>Exportar tu información</strong>.</p>
         </div>
         <div class="step-box">
-            <p><strong>3.</strong> Elige <strong>Exportar al dispositivo</strong> y en "Personalizar" selecciona <strong>solo Seguidores y seguidos</strong>.</p>
+            <p><strong>3.</strong> Elegí <strong>Exportar al dispositivo</strong> y en "Personalizar" seleccioná <strong>solo Seguidores y seguidos</strong>.</p>
         </div>
         <div class="step-box highlight">
-            <p><strong>4. ¡CLAVE!</strong> Cambia el Formato de <strong>HTML a JSON</strong> e inicia la exportación.</p>
+            <p><strong>4. ¡CLAVE!</strong> Cambiá el Formato de <strong>HTML a JSON</strong>, asegurate de que el <strong>intervalo de fechas</strong> diga "desde el principio", e iniciá la exportación.</p>
         </div>
         <div class="info-footer">
             <p>📧 Te llegará un mail de Meta con el archivo en unas horas.</p>
