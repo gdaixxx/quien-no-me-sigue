@@ -174,7 +174,7 @@ const UI = `
 
 const welcomeScreen = `
     <div id="presentation-title-wrapper">
-        <h1 class="animate__bounceOutDown animate__delay-2s animate__animated" id="presentation-title">Clasificador de&nbsp;seguidores</h1>
+        <h1 class="animate__bounceOutDown animate__delay-2s animate__animated" id="presentation-title">No te sige,&nbsp;Broh!</h1>
     </div>
     
     <div class="wrapper animate__animated animate__slideInRight animate__delay-3s">
